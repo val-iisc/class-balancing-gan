@@ -22,13 +22,6 @@ class WeightRegularizer():
     def __init__(self, num_classes, pretrained_model, init_param = 1, decay_weight = 0.5, beta = 0.99, number_sample = 10, mode="effective", init_size=512, class_req_perf = -1, actual_perf = 90, convex_comb = False):
         """Weight Regularizer is the regularizer based on output of a classifier. It 
         causes the GAN to avoid mode collapse for the imbalanced classes.
-
-        Args:
-            num_classes ([integer]): [description]
-            init_param (int, optional): [description]. Defaults to 1.
-            decay_weight (float, optional): [description]. Defaults to 0.5.
-            beta (float, optional): [description]. Defaults to 0.99.
-            mode (float, optional): [description]. If mode is effective there is effective reweights. Else inverse of class ratio.
         """
         
         self.count_class_samples = [50] * num_classes
@@ -63,13 +56,9 @@ class WeightRegularizer():
         self.i = 0
 
     def update(self, logger = None):
-        """[summary]
-
-        Args:
-            pred_class ([list]): [List containing the predicted classes for current batch]
+        """Update the effective class statistics.
         """
-        #pred_class_max = torch.argmax(self.pretrained_model(input_images), dim = 1)
-        #pred_class = [(pred_class_max == i).sum(dim=0) for i in range(self.num_classes)]
+
 
         
         stats, kl_div = self.get_stats()
@@ -100,17 +89,11 @@ class WeightRegularizer():
 
 
     def log_and_print(self, count_class_samples, writer = None):
-        """[summary]
+        """ Print the log of statistics of generated image classes"""
 
-        Args:
-            count_class_samples ([type]): [description]
-            writer ([type], optional): [Tensorbaord Writer]. Defaults to None.
-        """
         if len(self.stats) == self.number_to_sample:
             self.stats.pop(0)
-        # count_class_samples = [0 for i in range(self.num_classes)]
-        # for cls in pred_class:
-        #     count_class_samples[cls] += 1
+
         print("Max and Min of class samples",max(count_class_samples), min(count_class_samples))
         self.stats.append(count_class_samples)
         
@@ -120,8 +103,7 @@ class WeightRegularizer():
         
         if writer is not None:
             writer.add_scalar("12. Variance of Samples in Different Classes", np.std(stats))
-            # writer.add_figure("Average of Nber of Samples of Each Class Generated in Last 10 epochs", np.asarray(stats), bins=10)
-
+            
     def reset_stats(self):
         """[Reset the stats produced by classifier]
         """
@@ -179,8 +161,7 @@ class WeightRegularizer():
             self.i += 1
             pred_class_dict = [(k,v) for v, k in enumerate(pred_class)]
             pred_class_dict = sorted(pred_class_dict, reverse=True)
-            #print(pred_class_dict[:5])
-
+            
         self.pred_class = [ i + j for i,j in zip(self.pred_class, pred_class)]
         
 
@@ -188,9 +169,6 @@ class WeightRegularizer():
         sm_batch_mean = torch.from_numpy(self.weights).float().to(device = softmax_output.device)* torch.mean(softmax_output,dim=0)
         div_loss = torch.sum(sm_batch_mean*torch.log(torch.mean(softmax_output,dim=0)))
 
-
-        if target_labels != None:
-            div_loss += 0*self.ce_loss(output, target_labels)
 
         if labels:
             return div_loss, softmax_output
