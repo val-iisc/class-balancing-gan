@@ -94,7 +94,7 @@ def calculate_accuracy(dataloader, generator, discriminator, D_loss, num_evaluat
                 dis_out_fake = dis_out_fake.detach().cpu().numpy()
                 dis_out_real = dis_out_real.detach().cpu().numpy()
                 
-                print(dis_out_fake, dis_out_real)
+                #print(dis_out_fake, dis_out_real)
                 if weight_regularizer:
                     if reg_transform != None:
                         div_loss, softmax_output = weight_regularizer.loss(reg_transform(F.interpolate((fake_images + 1)/2, size=(224,224), mode='bilinear')), labels=True)

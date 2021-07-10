@@ -3,6 +3,7 @@ import numpy as np
 import torch.nn.functional as F
 
 def KL(P,Q):
+    
     """ Epsilon is used here to avoid conditional code for
     checking that neither P nor Q is equal to 0. """
     epsilon = 0.00001
@@ -20,7 +21,7 @@ class WeightRegularizer():
 
     def __init__(self, num_classes, pretrained_model, init_param = 1, decay_weight = 0.5, beta = 0.99, number_sample = 10, mode="effective", init_size=512, class_req_perf = -1, actual_perf = 90, convex_comb = False):
         """Weight Regularizer is the regularizer based on output of a classifier. It 
-        causes the GAN to avoid mode collapse
+        causes the GAN to avoid mode collapse for the imbalanced classes.
 
         Args:
             num_classes ([integer]): [description]
@@ -56,7 +57,7 @@ class WeightRegularizer():
         else:
             self.random_ratio = None
         
-        print(self.random_ratio)
+        
         
 
         self.i = 0
@@ -83,7 +84,7 @@ class WeightRegularizer():
         self.count_class_samples = [self.decay_weight * i for i in self.count_class_samples]
         for i in range(self.num_classes):
             self.count_class_samples[i] += (factor) * self.pred_class[i]
-        print(sorted(self.count_class_samples)[-5: ]) 
+
         self.reset_stats()
         # Clamp the values to one for values < 1
         self.count_class_samples = [max(1, i) for i in self.count_class_samples]

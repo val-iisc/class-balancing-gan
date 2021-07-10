@@ -18,7 +18,6 @@ from sync_batchnorm.batchnorm import convert_model
 from weight_regularizer import WeightRegularizer
 from trainer import Trainer
 from resnet_cifar import resnet32
-from models.resnetv2 import ResNetV2
 
 
 import glob
@@ -35,13 +34,13 @@ from torch.backends import cudnn
 from torch.nn import DataParallel
 from torch.nn.parallel import DistributedDataParallel
 from torch.utils.tensorboard import SummaryWriter
-from models.network import Network
+#from models.network import Network
 #from torchsampler import ImbalancedDatasetSampler
-from models.clf_inat import *
-from utils.lookahead import Lookahead
+#from models.clf_inat import *
+#from utils.lookahead import Lookahead
 
-from configs import update_config, cfg
-from utils.sample import BalancedBatchSampler
+# from configs import update_config, cfg
+# from utils.sample import BalancedBatchSampler
 try:
     import apex
 except:
@@ -269,39 +268,14 @@ def train_framework(seed, disable_debugging_API, fused_optimization, num_workers
         linear_model = None
         L_optimizer = None
 
-
+    
     
     if model_config["loss_function"]["weight_reg"]:
         print(model_config["loss_function"]["pretrained_model_path"].split(".")[-8:])
-        if False: # true 
-            # cfg.merge_from_file("./configs/iNaturalist2019.yaml")
-            # netC = Network(cfg, mode="test", num_classes=num_classes).to(default_device)
-            # netC.load_model(cfg.TEST.MODEL_FILE)
-            feat_model = create_model_resnet50(test=True)
-            clf_model = create_model_classifier(feat_dim = 2048, num_classes=num_classes, test=True)
 
-            ## load pretrained models
-            model_path = "./classifier-balancing/logs/iNaturalist18/clslearn/retrain_uni2ban/final_model_checkpoint.pth"
-            checkpoint = torch.load(model_path)
-            model_state = checkpoint['state_dict_best']
-
-            for key in list(model_state['feat_model'].keys()):
-                if 'module.' in key:
-                    model_state['feat_model'][key.replace('module.', '')] = model_state['feat_model'][key]
-                    del model_state['feat_model'][key]
-            
-            for key in list(model_state['classifier'].keys()):
-                if 'module.' in key:
-                    model_state['classifier'][key.replace('module.', '')] = model_state['classifier'][key]
-                    del model_state['classifier'][key]
-            
-            feat_model.load_state_dict(model_state['feat_model'])
-            clf_model.load_state_dict(model_state['classifier'])
-            netC = torch.nn.Sequential(feat_model, clf_model).to(default_device)
-            print(netC)
             
         
-        elif model_config["loss_function"]["pretrained_model_path"].split(".")[-2][-8:] == "few_shot":
+        if model_config["loss_function"]["pretrained_model_path"].split(".")[-2][-8:] == "few_shot":
             netC = ResNetV2(ResNetV2.BLOCK_UNITS['r50'], width_factor=1, head_size=num_classes, zero_head=True).to(default_device)
             netC.load_state_dict(torch.load(model_config["loss_function"]["pretrained_model_path"], map_location="cuda:0"))
             print("Few Shot Model Loaded")

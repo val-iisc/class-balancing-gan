@@ -79,8 +79,8 @@
 
         "weight_reg" : true,
         "weight_lambda" : 10,
-        "pretrained_model_path": "./LDAM-DRW/checkpoint/cifar10_resnet32_Focal_DRW_exp_0.01_0/ckpt.best.pth.tar",
-        "evaluation_checkpoint": "./LDAM-DRW/checkpoint/cifar10_resnet32_Focal_DRW_exp_1.0_0/ckpt.best.pth.tar"
+        "pretrained_model_path": "./cifar10_resnet32_Focal_DRW_exp_0.01_0/ckpt.best.pth.tar",
+        "evaluation_checkpoint": "./cifar10_resnet32_Focal_DRW_exp_0.01_0/ckpt.best.pth.tar"
       },
   
       "initialization":{

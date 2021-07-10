@@ -946,10 +946,7 @@ class Trainer:
             self.logger.info('Best FID score (Step: {step}, Using {type} moments): {FID}'.format(step=self.best_step, type=self.type4eval_dataset, FID=self.best_fid))
             self.logger.info('KL DIV Score at best FID step score (Step: {step}, Using {type} moments): {KLDIV}'.format(step=self.best_step, type=self.type4eval_dataset, KLDIV=self.best_kl_div))
 
-            if True:
-                self.logger.info('FID score Majority (Step: {step}, Using {type} moments): {FID}'.format(step=step, type=self.type4eval_dataset, FID=fid_score_majority))
-                self.logger.info('FID score Minority (Step: {step}, Using {type} moments): {FID}'.format(step=step, type=self.type4eval_dataset, FID=fid_score_minority))
-
+            
             self.dis_model.train()
             self.gen_model.train()
 
