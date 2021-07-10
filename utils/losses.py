@@ -293,7 +293,7 @@ def calc_derv(inputs, labels, netD, device, netG=None, scaler = None):
         
         inv_scale = 1/scaler.get_scale()
         gradients = gradients
-        print(gradients)
+        #print(gradients)
         gradients_norm = torch.unsqueeze((gradients.norm(2, dim=1) ** 2), dim=1)
 
         netD.train()

@@ -164,8 +164,8 @@ def calculate_accuracy(dataloader, generator, discriminator, D_loss, num_evaluat
             stats, kl_div = weight_regularizer.get_stats()
             stats = np.copy(stats)
             if logger is None:
-                print(stats)
-                print(confidence_stats/np.sum(stats))
+                print("Class Statistics" + str(stats))
+                print("Distribution of > 0.9 confidence samples" + str(confidence_stats/np.sum(confidence_stats)))
             else:
                 logger.info("Class Statistics" + str(stats))
                 logger.info("Distribution of > 0.9 confidence samples" + str(confidence_stats/np.sum(confidence_stats)))

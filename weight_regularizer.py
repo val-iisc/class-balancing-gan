@@ -3,7 +3,7 @@ import numpy as np
 import torch.nn.functional as F
 
 def KL(P,Q):
-    
+
     """ Epsilon is used here to avoid conditional code for
     checking that neither P nor Q is equal to 0. """
     epsilon = 0.00001
@@ -158,14 +158,13 @@ class WeightRegularizer():
                 softmax_output = torch.softmax(output, dim = 1)
             
             
-        #print(torch.max(softmax_output[:5], dim = 1))
+        
         pred_class_max = torch.argmax(softmax_output, dim = 1).cpu()
         
         if self.random_ratio is not None:
             # logic for random sampling
             random_mask = torch.rand((input_images.shape[0], )).le(self.random_ratio)
-            #print(random_mask, self.random_ratio)
-            #print(torch.sum(random_mask).true_divide(input_images.shape[0]))
+
             random_labels = torch.randint(0, self.num_classes, (input_images.shape[0], ))
             pred_class_max = (~random_mask) * pred_class_max + random_mask * random_labels
         

@@ -63,7 +63,7 @@ def train_framework(seed, disable_debugging_API, fused_optimization, num_workers
                     consistency_reg, g_init, d_init, random_flip_preprocessing, prior, truncated_factor, latent_op, ema, ema_decay,
                     ema_start, synchronized_bn, mixed_precision, hdf5_path_train, train_config, model_config, imb_factor, imb_type, fixed_augment_p, evaluation_checkpoint, **_):
 
-    print(imb_type, imb_factor)
+    
     if seed == 82624:
         cudnn.benchmark = True # Not good Generator for undetermined input size
         cudnn.deterministic = False

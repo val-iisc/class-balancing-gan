@@ -184,7 +184,7 @@ def get_activations(data_loader, generator, discriminator, inception_model, n_ge
             if total_instance >= images.shape[0]:
                 pred_arr[start:end] = embeddings.cpu().data.numpy().reshape(images.shape[0], -1)
             else:
-                print(embeddings.shape, total_instance)
+                
                 pred_arr[start:] = embeddings[:total_instance].cpu().data.numpy().reshape(total_instance, -1)
             
             start += images.shape[0]
@@ -217,7 +217,7 @@ def get_activations(data_loader, generator, discriminator, inception_model, n_ge
                 if total_instance >= images.shape[0]:
                     pred_arr[start:end] = embeddings.cpu().data.numpy().reshape(images.shape[0], -1)
                 else:
-                    print(start, end)
+                    
                     pred_arr[start: ] = embeddings[:total_instance].cpu().data.numpy().reshape(images.shape[0], -1)
                 
                 start += images.shape[0]
@@ -225,7 +225,7 @@ def get_activations(data_loader, generator, discriminator, inception_model, n_ge
 
 
             except StopIteration:
-                print(start, end)
+                
                 break
         pbar.update(images.shape[0])
     return pred_arr
