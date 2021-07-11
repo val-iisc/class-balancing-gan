@@ -31,7 +31,7 @@ conda env create -f environment.yml -n classbalancinggan
 CIFAR-10 dataset will be downloaded automatically in ```./data``` folder in the project directory. For LSUN dataset download please follow the instructions [here](https://github.com/fyu/lsun) on how to download, then update the config file with the dataset path.
 
 
-### 3. Pretrained Classifier
+## 3. Pretrained Classifier
 
 One of the requirments of our framework is the availability of pretrained classifier on the data on the classes you want to train the GAN. For all the results we use the [LDAM-DRW](https://github.com/kaidic/LDAM-DRW) repo to obtain the pretrained models. We provide link for downloading the pretrained models of classifier.
 
@@ -49,13 +49,13 @@ For each of the imbalance factors (i.e. 0.01, 0.1 and 1) there is seperate confi
 For CIFAR10 image generation training:
 
 ```
-CUDA_VISIBLE_DEVICES=1 python3 main.py  -c "./configs/Unconditional_img_synthesis/no_dcgan_cifar32_rel_weightReg_0.01_no.json" -mpc --eval
+python3 main.py  -c "./configs/Unconditional_img_synthesis/no_dcgan_cifar32_rel_weightReg_0.01_no.json" -mpc --eval
 ```
 
 For LSUN image generation training:
 
 ```
-CUDA_VISIBLE_DEVICES=1 python3 main.py  -t -c "./configs/Unconditional_img_synthesis/no_dcgan_lsun_rel_weightReg_0.1_no.json" -mpc --eval
+python3 main.py  -t -c "./configs/Unconditional_img_synthesis/no_dcgan_lsun_rel_weightReg_0.1_no.json" -mpc --eval
 ```
 Most experiments were run on an Nvidia 12GB RTX 2080ti gpu.
 ## 5. References
