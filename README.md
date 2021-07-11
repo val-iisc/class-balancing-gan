@@ -1,10 +1,12 @@
 ## Class Balancing GAN with A Classifier In the Loop
 
-This is code release for our UAI 2021 paper Class Balancing GAN with a Classifier in the Loop. This is built upon the StudioGAN and LDAM-DRW repository.
+
+This is code release for our UAI 2021 paper Class Balancing GAN with a Classifier in the Loop. 
+[Overview](figures/approach.jpg)
 
 
 
-## 3. Requirements
+## 1. Requirements
 
 - Anaconda
 - Python > 3.6
@@ -24,26 +26,11 @@ conda env create -f environment.yml -n classbalancinggan
 
 
 
-## 4. Dataset(CIFAR10, Tiny ImageNet, ImageNet possible)
-The folder structure of the datasets is shown below:
-```
-├── data
-   └── ILSVRC2012
-       ├── train
-           ├── n01443537
-     	        ├── image1.png
-     	        ├── image2.png
-		└── ...
-           ├── n01629819
-           └── ...
-       ├── valid
-           └── val_folder
-	        ├── val1.png
-     	        ├── val2.png
-		└── ...
-```
+## 2. Dataset (CIFAR10, LSUN)
+CIFAR-10 dataset will be downloaded automatically in ```./data``` folder in the project directory. For LSUN dataset download please follow the instructions [here](https://github.com/fyu/lsun) on how to download, then update the config file with the dataset path.
 
-### Pretrained Classifier
+
+### 3. Pretrained Classifier
 
 One of the requirments of our framework is the availability of pretrained classifier on the data on the classes you want to train the GAN. For all the results we use the [LDAM-DRW](https://github.com/kaidic/LDAM-DRW) repo to obtain the pretrained models. We provide link for downloading the pretrained models of classifier.
 
@@ -55,7 +42,7 @@ LSUN | [link](https://drive.google.com/file/d/1vvNVQLFFmpv1qxX_28V-sVDdSHwFM58X/
 Please download these files before you start to run experiments. Update the path of pretrained models in the ```pretrained_model_path``` field in the configurations in ```./configs``` folder.
 
 
-## 5. How to run
+## 4. How to run
 For each of the imbalance factors (i.e. 0.01, 0.1 and 1) there is seperate configuration file in the config folder.
 
 For CIFAR10 image generation training:
@@ -70,7 +57,7 @@ For LSUN image generation training:
 CUDA_VISIBLE_DEVICES=1 python3 main.py  -t -c "./configs/Unconditional_img_synthesis/no_dcgan_lsun_rel_weightReg_0.1_no.json" -mpc --eval
 ```
 Most experiments were run on an Nvidia 12GB RTX 2080ti gpu.
-## 6. References
+## 5. References
 
 **PyTorch-StudioGAN** : https://github.com/POSTECH-CVLab/PyTorch-StudioGAN
 
@@ -78,7 +65,7 @@ Most experiments were run on an Nvidia 12GB RTX 2080ti gpu.
 
 We thank them for open sourcing their code which has been immensely helpful.
 
-## 7. Citation
+## 6. Citation
 Please email <harshr@iisc.ac.in> in case of any queries. In case you find our work useful please consider citing the following paper:
 
 ```
