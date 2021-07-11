@@ -1,8 +1,9 @@
-## Class Balancing GAN with A Classifier In the Loop
+## Class Balancing GAN with A Classifier In the Loop ([Paper](https://arxiv.org/abs/2106.09402))
 
 
 This is code release for our UAI 2021 paper Class Balancing GAN with a Classifier in the Loop. 
-[Overview](figures/approach.jpg)
+![approach](https://user-images.githubusercontent.com/15148765/125190714-1f9a3300-e25c-11eb-9933-e13e91c79ea6.jpg)
+
 
 
 
