@@ -119,8 +119,6 @@ def train_framework(seed, disable_debugging_API, fused_optimization, num_workers
     Gen = module.Generator(z_dim, shared_dim, img_size, g_conv_dim, g_spectral_norm, attention, attention_after_nth_gen_block, activation_fn,
                            conditional_strategy, num_classes, g_init, G_depth, mixed_precision).to(default_device)
     
-    
-    d_conditional_strategy = "no"
     Dis = module.Discriminator(img_size, d_conv_dim, d_spectral_norm, attention, attention_after_nth_dis_block, activation_fn, d_conditional_strategy,
                                hypersphere_dim, num_classes, nonlinear_embed, normalize_embed, d_init, D_depth, mixed_precision).to(default_device)
 
