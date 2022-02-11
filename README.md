@@ -1,7 +1,7 @@
 ## Class Balancing GAN with A Classifier In the Loop ([Paper](https://arxiv.org/abs/2106.09402))
 
 
-This is code release for our UAI 2021 paper Class Balancing GAN with a Classifier in the Loop. 
+This is code release for our **UAI 2021** paper Class Balancing GAN with a Classifier in the Loop. 
 ![approach](https://user-images.githubusercontent.com/15148765/125190714-1f9a3300-e25c-11eb-9933-e13e91c79ea6.jpg)
 
 
@@ -70,11 +70,13 @@ We thank them for open sourcing their code which has been immensely helpful.
 Please email <harshr@iisc.ac.in> in case of any queries. In case you find our work useful please consider citing the following paper:
 
 ```
-@article{rangwani2021class,
+@inproceedings{rangwani2021class,
   title={Class Balancing GAN with a Classifier in the Loop},
   author={Rangwani, Harsh and Mopuri, Konda Reddy and Babu, R Venkatesh},
-  journal={arXiv preprint arXiv:2106.09402},
-  year={2021}
+  booktitle={Uncertainty in Artificial Intelligence},
+  pages={1618--1627},
+  year={2021},
+  organization={PMLR}
 }
 ```
 
