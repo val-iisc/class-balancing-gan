@@ -42,7 +42,7 @@ def loss_hinge_dis(dis_out_real, dis_out_fake):
     return torch.mean(F.relu(1. - dis_out_real)) + torch.mean(F.relu(1. + dis_out_fake))
 
 
-def loss_hinge_gen(gen_out_fake):
+def loss_hinge_gen(gen_out_fake, dis_out_real):
     return -torch.mean(gen_out_fake)
 
 
